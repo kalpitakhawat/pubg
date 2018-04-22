@@ -1,0 +1,54 @@
+
+a.nav-link.active {
+    background-color: #e5a50f !important;
+    border-color: #dc9e0e;
+    color: #ffffff;
+}
+
+a.lead_mode.nav-link.active,a.lead_server.nav-link.active {
+    background-color: #e5a50f ;
+	border-color: #dc9e0e;
+	color: #ffffff;
+}
+
+a.lead_mode.nav-link:hover,a.lead_server.nav-link:hover {
+	border-color: #dc9e0e;
+    background-color: #e5a50f;
+	color: #ffffff;
+}
+
+table, .table {
+    color: #999 ;
+}
+
+th {
+	color: #ffffff;
+}
+.lead_mode {
+background-color: #f2b935;
+border: 1px solid #f2b935;
+border-radius: 0px !important;
+color: white;
+padding: .5rem 1rem;
+
+}
+
+.lead_server {
+padding: .5rem 1rem;
+background-color: #f2b935;
+border: 1px solid #f2b935;
+border-radius: 0px !important;
+color: #ffffff;
+
+}
+
+body {
+   background-image: url('../img/backgroundTest2.jpg');
+   background-color: #cccccc;
+   color: #ffffff;
+}
+
+.ftitle{
+	color: #ffffff;
+}
+
