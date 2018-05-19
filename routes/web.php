@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 Route::get('/refresh-data', 'RootController@refreshData');
 Route::get('/leaderboard', 'RootController@leaderboard')->name('leaderboard');
+Route::get('/player/{username}', 'RootController@playerDetails')->name('player-details');

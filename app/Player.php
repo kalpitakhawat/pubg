@@ -13,4 +13,5 @@ class Player extends Model
     {
     	return $this->hasOne('App\Score','username','username');
     }
+    
 }

@@ -18,6 +18,7 @@ class RootController extends Controller
 	    	$score = Score::where('server',$server)->where('mode',$mode)->delete();
 	    	$data = $client->get('https://pubg.op.gg/api/leaderboard/ranked-users?server='.$server.'&queue_size='.$mode.'&mode='.$fpp_tpp.'&limit=100');
 	    	$data = json_decode($data->getBody()->getContents());
+        // dd($data);
 	    	$data = $data->items;
 	    	foreach ($data as $key => $value) {
 	    		$player = Player::updateOrCreate(['username'=>$value->user->nickname],['username'=>$value->user->nickname,'profileurl'=>$value->user->profile_url]);
@@ -42,7 +43,7 @@ class RootController extends Controller
 					'time_survived_avg'=>$value->ranked_stats->stats->time_survived_avg,
 					'rating'=>$value->ranked_stats->stats->rating,
 
-	    		]);	
+	    		]);
 	    	}
 
 	    	dd('Done');
@@ -51,12 +52,25 @@ class RootController extends Controller
     	}
     }
     public function leaderboard(Request $r)
-    {	
+    {
     	$server = !empty($r->server_name)?$r->server_name:'na';
     	$mode = !empty($r->mode)?$r->mode:'1';
     	$fpp_tpp = !empty($r->type)?$r->type:'tpp';
     	// die($server .'-'. $mode.'-'.$fpp_tpp);
     	$playerScores = Score::where('server',$server)->where('mode',$mode)->where('fpp_tpp',$fpp_tpp)->with(['player'])->get();
     	return view('leaderboard')->with('playerScores',$playerScores);
+    }
+
+
+    public function playerDetails(Request $request,$username)
+    {
+      $servers = Score::where('username',$username)->groupBy('server')->pluck('server');
+      $selectedServer = $servers [0];
+      $selectedMode= '1';
+      $player = Player::where('username',$username)->first();
+      return view('player')->with([
+        'player'=>$player,
+        'servers'=>$servers,
+      ]);
     }
 }
